@@ -168,7 +168,7 @@ def board_move(board_to_move,x_size, y_size):
             board_to_move[j][i] = False
 
     for i in range(61,76):
-        for j in range(31,37):
+        for j in range(32,37):
             board_to_move[j][i] = False
 
     for i in range(61,71):
@@ -267,7 +267,7 @@ def board_move(board_to_move,x_size, y_size):
         for j in range(54,55):
             board_to_move[j][i] = False
 
-    for i in range(7,21):
+    for i in range(7,22):
         for j in range(54,55):
             board_to_move[j][i] = False
 
@@ -286,6 +286,7 @@ def board_move(board_to_move,x_size, y_size):
 
     for i in range(1, 60):
         board_to_move[i][76] = False
+
 def board_dots(board_yellow_dots):
     #left up
     for i in range(11):
