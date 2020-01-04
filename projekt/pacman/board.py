@@ -1,9 +1,9 @@
 import pygame
-def board_lines(gameDisplay,blue_color):
+def board_lines(gameDisplay, blue_color):
     #left
-    pygame.draw.rect(gameDisplay,blue_color,[80,70,100,40],3)
-    pygame.draw.rect(gameDisplay,blue_color,[80,160,100,10],3)
-    pygame.draw.rect(gameDisplay,blue_color,[230,70,100,39],3)
+    pygame.draw.rect(gameDisplay, blue_color, [80, 70, 100, 40], 3)
+    pygame.draw.rect(gameDisplay, blue_color, [80, 160, 100, 10], 3)
+    pygame.draw.rect(gameDisplay, blue_color, [230, 70, 100, 39], 3)
 
     pygame.draw.line(gameDisplay, blue_color, (180, 280), (180, 220), 3)
     pygame.draw.line(gameDisplay, blue_color, (30, 280), (180, 280), 3)
@@ -41,15 +41,15 @@ def board_lines(gameDisplay,blue_color):
     pygame.draw.line(gameDisplay, blue_color, (240, 160), (240, 220), 3)
     pygame.draw.line(gameDisplay, blue_color, (330, 220), (330, 230), 3)
 
-    pygame.draw.rect(gameDisplay,blue_color,[230,340,10,40],3)
+    pygame.draw.rect(gameDisplay, blue_color, [230, 340, 10, 40], 3)
 
-    pygame.draw.rect(gameDisplay,blue_color,[230,430,100,10],3)
+    pygame.draw.rect(gameDisplay, blue_color, [230, 430, 100, 10], 3)
 
-    pygame.draw.rect(gameDisplay,blue_color,[290,490,40,70],3)
+    pygame.draw.rect(gameDisplay, blue_color, [290, 490, 40, 70], 3)
 
 
     #center
-    pygame.draw.rect(gameDisplay,blue_color,[380,21,40,89],3)
+    pygame.draw.rect(gameDisplay, blue_color, [380, 21, 40, 89], 3)
     pygame.draw.line(gameDisplay, blue_color, (290, 160), (510, 160), 3)
     pygame.draw.line(gameDisplay, blue_color, (290, 160), (290, 170), 3)
     pygame.draw.line(gameDisplay, blue_color, (290, 170), (380, 170), 3)
@@ -72,12 +72,12 @@ def board_lines(gameDisplay,blue_color):
     pygame.draw.line(gameDisplay, blue_color, (420, 490), (420, 609), 3)
     pygame.draw.line(gameDisplay, blue_color, (380, 490), (420, 490), 3)
 
-    pygame.draw.rect(gameDisplay,blue_color,[290,280,220,10],3)
+    pygame.draw.rect(gameDisplay, blue_color, [290, 280, 220, 10], 3)
 
     #right
-    pygame.draw.rect(gameDisplay,blue_color,[620,70,100,40],3)
-    pygame.draw.rect(gameDisplay,blue_color,[620,160,100,10],3)
-    pygame.draw.rect(gameDisplay,blue_color,[470,70,100,39],3)
+    pygame.draw.rect(gameDisplay, blue_color, [620, 70, 100, 40], 3)
+    pygame.draw.rect(gameDisplay, blue_color, [620, 160, 100, 10], 3)
+    pygame.draw.rect(gameDisplay, blue_color, [470, 70, 100, 39], 3)
 
     pygame.draw.line(gameDisplay, blue_color, (620, 280), (620, 220), 3)
     pygame.draw.line(gameDisplay, blue_color, (620, 280), (770, 280), 3)
@@ -115,167 +115,167 @@ def board_lines(gameDisplay,blue_color):
     pygame.draw.line(gameDisplay, blue_color, (560, 160), (560, 220), 3)
     pygame.draw.line(gameDisplay, blue_color, (470, 220), (470, 230), 3)
 
-    pygame.draw.rect(gameDisplay,blue_color,[560,340,10,40],3)
+    pygame.draw.rect(gameDisplay, blue_color, [560, 340, 10, 40], 3)
 
-    pygame.draw.rect(gameDisplay,blue_color,[470,430,100,10],3)
+    pygame.draw.rect(gameDisplay, blue_color, [470, 430, 100, 10], 3)
 
-    pygame.draw.rect(gameDisplay,blue_color,[470,490,40,70],3)
+    pygame.draw.rect(gameDisplay, blue_color, [470, 490, 40, 70], 3)
 
 
-def board_move(board_to_move,x_size, y_size):
-    for i in range(7,17):
-        for j in range(6,10):
+def board_move(board_to_move):
+    for i in range(7, 17):
+        for j in range(6, 10):
             board_to_move[j][i] = False
 
-    for i in range(7,17):
-        for j in range(15,16):
+    for i in range(7, 17):
+        for j in range(15, 16):
             board_to_move[j][i] = False
 
-    for i in range(2,17):
-        for j in range(21,27):
+    for i in range(2, 17):
+        for j in range(21, 27):
             board_to_move[j][i] = False
 
-    for i in range(2,17):
-        for j in range(32,37):
+    for i in range(2, 17):
+        for j in range(32, 37):
             board_to_move[j][i] = False
 
-    for i in range(7,17):
-        for j in range(42,43):
+    for i in range(7, 17):
+        for j in range(42, 43):
             board_to_move[j][i] = False
 
-    for i in range(13,17):
-        for j in range(43,49):
+    for i in range(13, 17):
+        for j in range(43, 49):
             board_to_move[j][i] = False
 
-    for i in range(22,23):
-        for j in range(49,54):
+    for i in range(22, 23):
+        for j in range(49, 54):
             board_to_move[j][i] = False
 
-    for i in range(22,23):
-        for j in range(48,55):
+    for i in range(22, 23):
+        for j in range(48, 55):
             board_to_move[j][i] = False
 
-    for i in range(28,50):
-        for j in range(27,28):
+    for i in range(28, 50):
+        for j in range(27, 28):
             board_to_move[j][i] = False
 
-    for i in range(22,23):
-        for j in range(33,37):
+    for i in range(22, 23):
+        for j in range(33, 37):
             board_to_move[j][i] = False
 
-    for i in range(55,56):
-        for j in range(33,37):
+    for i in range(55, 56):
+        for j in range(33, 37):
             board_to_move[j][i] = False
 
-    for i in range(61,76):
-        for j in range(32,37):
+    for i in range(61, 76):
+        for j in range(32, 37):
             board_to_move[j][i] = False
 
-    for i in range(61,71):
-        for j in range(42,43):
+    for i in range(61, 71):
+        for j in range(42, 43):
             board_to_move[j][i] = False
 
-    for i in range(28,50):
-        for j in range(33,37):
+    for i in range(28, 50):
+        for j in range(33, 37):
             board_to_move[j][i] = False
 
-    for i in range(37,41):
-        for j in range(37,43):
+    for i in range(37, 41):
+        for j in range(37, 43):
             board_to_move[j][i] = False
 
-    for i in range(22,32):
-        for j in range(42,43):
+    for i in range(22, 32):
+        for j in range(42, 43):
             board_to_move[j][i] = False
 
-    for i in range(46,56):
-        for j in range(42,43):
+    for i in range(46, 56):
+        for j in range(42, 43):
             board_to_move[j][i] = False
 
-    for i in range(61,65):
-        for j in range(43,49):
+    for i in range(61, 65):
+        for j in range(43, 49):
             board_to_move[j][i] = False
 
-    for i in range(70,76):
-        for j in range(48,49):
+    for i in range(70, 76):
+        for j in range(48, 49):
             board_to_move[j][i] = False
 
-    for i in range(22,32):
-        for j in range(6,10):
+    for i in range(22, 32):
+        for j in range(6, 10):
             board_to_move[j][i] = False
 
-    for i in range(46,56):
-        for j in range(6,10):
+    for i in range(46, 56):
+        for j in range(6, 10):
             board_to_move[j][i] = False
 
-    for i in range(37,41):
-        for j in range(1,10):
+    for i in range(37, 41):
+        for j in range(1, 10):
             board_to_move[j][i] = False
 
-    for i in range(61,71):
-        for j in range(6,10):
+    for i in range(61, 71):
+        for j in range(6, 10):
             board_to_move[j][i] = False
 
-    for i in range(61,76):
-        for j in range(21,27):
+    for i in range(61, 76):
+        for j in range(21, 27):
             board_to_move[j][i] = False
 
-    for i in range(22,23):
-        for j in range(15,28):
+    for i in range(22, 23):
+        for j in range(15, 28):
             board_to_move[j][i] = False
 
-    for i in range(23,32):
-        for j in range(21,22):
+    for i in range(23, 32):
+        for j in range(21, 22):
             board_to_move[j][i] = False
 
-    for i in range(28,50):
-        for j in range(15,16):
+    for i in range(28, 50):
+        for j in range(15, 16):
             board_to_move[j][i] = False
 
-    for i in range(37,41):
-        for j in range(16,22):
+    for i in range(37, 41):
+        for j in range(16, 22):
             board_to_move[j][i] = False
 
-    for i in range(55,56):
-        for j in range(15,28):
+    for i in range(55, 56):
+        for j in range(15, 28):
             board_to_move[j][i] = False
 
-    for i in range(46,54):
-        for j in range(21,22):
+    for i in range(46, 54):
+        for j in range(21, 22):
             board_to_move[j][i] = False
 
-    for i in range(61,71):
-        for j in range(15,16):
+    for i in range(61, 71):
+        for j in range(15, 16):
             board_to_move[j][i] = False
 
-    for i in range(37,41):
-        for j in range(48,60):
+    for i in range(37, 41):
+        for j in range(48, 60):
             board_to_move[j][i] = False
 
-    for i in range(28,32):
-        for j in range(48,55):
+    for i in range(28, 32):
+        for j in range(48, 55):
             board_to_move[j][i] = False
 
-    for i in range(46,50):
-        for j in range(48,55):
+    for i in range(46, 50):
+        for j in range(48, 55):
             board_to_move[j][i] = False
 
-    for i in range(55,56):
-        for j in range(48,55):
+    for i in range(55, 56):
+        for j in range(48, 55):
             board_to_move[j][i] = False
 
-    for i in range(56,71):
-        for j in range(54,55):
+    for i in range(56, 71):
+        for j in range(54, 55):
             board_to_move[j][i] = False
 
-    for i in range(7,22):
-        for j in range(54,55):
+    for i in range(7, 22):
+        for j in range(54, 55):
             board_to_move[j][i] = False
 
-    for i in range(2,6):
-        for j in range(48,49):
+    for i in range(2, 6):
+        for j in range(48, 49):
             board_to_move[j][i] = False
 
-    for i in range(2,77):
+    for i in range(2, 77):
             board_to_move[0][i] = False
 
     for i in range(2, 77):
@@ -327,7 +327,6 @@ def board_dots(board_yellow_dots):
     board_yellow_dots[47][9] = True
     board_yellow_dots[47][12] = True
     board_yellow_dots[50][12] = True
-
     board_yellow_dots[56][6] = True
 
     for i in range(6):
@@ -396,7 +395,6 @@ def board_dots(board_yellow_dots):
     board_yellow_dots[56][54] = True
     board_yellow_dots[53][54] = True
     board_yellow_dots[50][54] = True
-
 
     board_yellow_dots[29][27] = True
     board_yellow_dots[35][27] = True
