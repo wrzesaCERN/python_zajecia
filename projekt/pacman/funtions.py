@@ -8,7 +8,7 @@ def beginning_positions(player_pos_x,player_pos_y, ghost_pos_x,ghost_pos_y):
     ghost_pos_x = [5, 5, 69, 69]
     ghost_pos_y = [29, 29, 29, 29]
 
-def ghosts_move(ghost_delay, ghost_direction, board_to_move, ghost_pos_x, ghost_pos_y, ghost_d, ghost_u, ghost_l, ghost_r, can_the_ghost_go_forward, can_the_ghost_change_direction, gameDisplay, ghosts, pacman_bg):
+def ghosts_move(ghost_delay, ghost_direction, board_to_move, ghost_pos_x, ghost_pos_y, ghost_d, ghost_u, ghost_l, ghost_r, can_the_ghost_go_forward, can_the_ghost_change_direction, gameDisplay, pacman_bg, ghosts):
     for ii in range(4):
         if ghost_delay[ii] == 0:
             if board_to_move[ghost_pos_y[ii] + 3][ghost_pos_x[ii] + 2] and board_to_move[ghost_pos_y[ii] + 3][ghost_pos_x[ii] - 2] and board_to_move[ghost_pos_y[ii] + 3][ghost_pos_x[ii] + 1] and board_to_move[ghost_pos_y[ii] + 3][ghost_pos_x[ii]] and board_to_move[ghost_pos_y[ii] + 3][ghost_pos_x[ii] - 1]:
@@ -113,65 +113,5 @@ def change_direction(can_the_ghost_change_direction, ghost_direction, ghost_d, g
                 changed = True
 
 def player_move(board_to_move, player_pos_x, player_pos_y, gameDisplay, pacman_bg, pacman_directions, board_yellow_dots, score, eating_Sound, eat_Sound, event):
-    if board_to_move[player_pos_y+3][player_pos_x+2] and board_to_move[player_pos_y+3][player_pos_x-2]:
-        d = True
-    if board_to_move[player_pos_y-3][player_pos_x+2] and board_to_move[player_pos_y-3][player_pos_x-2]:
-        u = True
-    if board_to_move[player_pos_y+2][player_pos_x-3] and board_to_move[player_pos_y-2][player_pos_x-3]:
-        l = True
-    if board_to_move[player_pos_y+2][player_pos_x+3] and board_to_move[player_pos_y-2][player_pos_x+3]:
-        r = True
-
-    if event.type == pygame.KEYDOWN:
-        if (event.key == pygame.K_DOWN) and d:
-            gameDisplay.blit(pacman_bg, (player_pos_x*10-3, player_pos_y*10-3))
-            player_pos_y += 1
-            gameDisplay.blit(pacman_directions[3], (player_pos_x*10-3, player_pos_y*10-3))
-            if board_yellow_dots[player_pos_y][player_pos_x+2]:
-                board_yellow_dots[player_pos_y][player_pos_x+2] = False
-                score += 1
-                if not eating_Sound.get_busy():
-                    eating_Sound.play(eat_Sound)
-            if board_yellow_dots[player_pos_y+3][player_pos_x+2]:
-                board_yellow_dots[player_pos_y+3][player_pos_x+2] = False
-                score += 1
-                if not eating_Sound.get_busy():
-                    eating_Sound.play(eat_Sound)
-        elif (event.key == pygame.K_UP) and u:
-            gameDisplay.blit(pacman_bg, (player_pos_x*10-3, player_pos_y*10-3))
-            player_pos_y=player_pos_y-1
-            gameDisplay.blit(pacman_directions[2], (player_pos_x*10-3, player_pos_y*10-3))
-            if board_yellow_dots[player_pos_y-2][player_pos_x+2]:
-                board_yellow_dots[player_pos_y-2][player_pos_x+2] = False
-                score += 1
-                if not eating_Sound.get_busy():
-                    eating_Sound.play(eat_Sound)
-            if board_yellow_dots[player_pos_y+1][player_pos_x+2]:
-                board_yellow_dots[player_pos_y+1][player_pos_x+2] = False
-                score += 1
-                if not eating_Sound.get_busy():
-                    eating_Sound.play(eat_Sound)
-        elif (event.key == pygame.K_RIGHT) and r:
-            gameDisplay.blit(pacman_bg, (player_pos_x*10-3, player_pos_y*10-3))
-            player_pos_x = player_pos_x + 1
-            gameDisplay.blit(pacman_directions[1], (player_pos_x*10-3, player_pos_y*10-3))
-            if board_yellow_dots[player_pos_y+2][player_pos_x+3]:
-                board_yellow_dots[player_pos_y+2][player_pos_x+3] = False
-                score +=1
-                if not eating_Sound.get_busy():
-                    eating_Sound.play(eat_Sound)
-            if board_yellow_dots[player_pos_y + 2][player_pos_x]:
-                board_yellow_dots[player_pos_y + 2][player_pos_x] = False
-                score += 1
-                if not eating_Sound.get_busy():
-                    eating_Sound.play(eat_Sound)
-        elif (event.key == pygame.K_LEFT) and l:
-            gameDisplay.blit(pacman_bg, (player_pos_x*10-3, player_pos_y*10-3))
-            player_pos_x = player_pos_x - 1
-            gameDisplay.blit(pacman_directions[0], (player_pos_x*10-3, player_pos_y*10-3))
-            if board_yellow_dots[player_pos_y+2][player_pos_x+1]:
-                board_yellow_dots[player_pos_y+2][player_pos_x+1] = False
-                score += 1
-                if not eating_Sound.get_busy():
-                    eating_Sound.play(eat_Sound)
-        print(score)
+    pass
+    # copy paste

@@ -11,7 +11,7 @@ y_size = 66#61
 x_size = 85#80
 
 # settings at the beginning
-score_max = 200 #muszępoliczyć
+score_max = 227
 ghost_delay = [0, 11, 2, 16] # delay at the beginning, when ghosts appear on the board
 
 
@@ -19,6 +19,7 @@ score = 1
 player_pos_x = 43
 player_pos_y = 45
 ghost_direction = [4, 4, 3, 3] # 1 - down, 2 - up, 3 - left, 4 - right
+lives = 3
 
 can_the_ghost_go_forward = [True, True, True, True] # If true the ghost can go one step forward, in the same direction. If "false" it means a wall or an obstacle
 can_the_ghost_change_direction = [False, False, False, False] # It gives a possibility to change the ghost's direction - not only when hit the wall or obstacles
@@ -35,12 +36,11 @@ ghost_color_frozen = "ghost_red.png" #musze zrobić nieieskiego ducha
 gameDisplay = pygame.display.set_mode((800, 700))
 pygame.display.set_caption('P A C M A N')
 gameDisplay.fill((0, 0, 0)) # black background
-
 pygame.draw.rect(gameDisplay, (0, 255, 255), [30, 20, 741, 590], 1) # board rectangle
 board.board_lines(gameDisplay, blue_color) # A function that draw obstacles on the board
 
 # An array of the board. Every position is labeled as by the true or false value. we can move only if we have 5 true one by one in x and y
-board.board_move(board_to_move, x_size, y_size)
+board.board_move(board_to_move)
 
 # A board of yellow dots
 def yellow_dot(pos_x,pos_y):
@@ -76,6 +76,11 @@ pygame.mixer.music.play()
 eating_Sound = pygame.mixer.Channel(2)
 eat_Sound = pygame.mixer.Sound('pacman_chomp.wav')
 eat_Sound.set_volume(0.5)
+lives_decrease_Sound = pygame.mixer.Channel(3)
+lives_Sound = pygame.mixer.Sound('pacman_death.wav')
+lives_Sound.set_volume(0.5)
+
+font = pygame.font.SysFont("comicsansms", 36)
 
 gameExit = False
 while not gameExit:
@@ -85,7 +90,7 @@ while not gameExit:
 
     for i in range(0, 80):
         for j in range(0, 61):
-            if board_yellow_dots[j][i] == True:
+            if board_yellow_dots[j][i]:
                 yellow_dot(i * 10 - 5, j * 10 - 5)
 
     d = False
@@ -98,7 +103,7 @@ while not gameExit:
     ghost_l = [False, False, False, False]
     ghost_r = [False, False, False, False]
 
-    funtions.ghosts_move(ghost_delay, ghost_direction, board_to_move, ghost_pos_x, ghost_pos_y, ghost_d, ghost_u, ghost_l, ghost_r, can_the_ghost_go_forward, can_the_ghost_change_direction, gameDisplay, board_yellow_dots, yellow_dot, ghosts, pacman_bg)
+    funtions.ghosts_move(ghost_delay, ghost_direction, board_to_move, ghost_pos_x, ghost_pos_y, ghost_d, ghost_u, ghost_l, ghost_r, can_the_ghost_go_forward, can_the_ghost_change_direction, gameDisplay, pacman_bg, ghosts)
 
     #funtions.player_move(board_to_move, player_pos_x, player_pos_y, gameDisplay, pacman_bg, pacman_directions, board_yellow_dots, score, eating_Sound, eat_Sound, event)
     if board_to_move[player_pos_y+3][player_pos_x+2] and board_to_move[player_pos_y+3][player_pos_x-2]:
@@ -163,6 +168,35 @@ while not gameExit:
                 if not eating_Sound.get_busy():
                     eating_Sound.play(eat_Sound)
         print(score)
+
+    for ii in range(4):
+        if abs(player_pos_x - ghost_pos_x[ii]) < 3 and abs(player_pos_y - ghost_pos_y[ii]) < 3:
+            if not lives_decrease_Sound.get_busy():
+                lives_decrease_Sound.play(lives_Sound)
+
+                gameDisplay.fill((0, 0, 0))  # black background
+                pygame.draw.rect(gameDisplay, (0, 255, 255), [30, 20, 741, 590], 1)  # board rectangle
+                board.board_lines(gameDisplay, blue_color)  # A function that draw obstacles on the board
+
+                for i in range(0, 80):
+                    for j in range(0, 61):
+                        if board_yellow_dots[j][i]:
+                            yellow_dot(i * 10 - 5, j * 10 - 5)
+
+                player_pos_x = 43
+                player_pos_y = 45
+                ghost_pos_x = [5, 5, 69, 69]
+                ghost_pos_y = [29, 29, 29, 29]
+                ghost_delay = [0, 11, 2, 16]
+
+                gameDisplay.blit(pacman_directions[0], (player_pos_x * 10 - 3, player_pos_y * 10 - 3))
+
+                lives -=1
+                time.sleep(2)
+
+    pygame.draw.rect(gameDisplay, (0,0,0), [30, 620, 700, 40])
+    text = font.render(f'Lives: {lives}/3                                           Scores: {score}/{score_max}', True, (255, 255, 0))
+    gameDisplay.blit(text, (100, 630))
     pygame.display.update()
     time.sleep(0.1)
 
