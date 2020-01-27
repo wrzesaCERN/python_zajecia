@@ -11,8 +11,8 @@ Ustawienie kilku podstawowych parametrów wejściowych, takich jak wielkość pl
  opóźnienie z jakim wychodzą duchy na początku ghost_delay, początowa pozycja gracza player_pos_x/y etc....
 """
 
-y_size = 66
-x_size = 85
+Y_SIZE = 66
+X_SIZE = 85
 
 lives = 3
 score = 1
@@ -22,13 +22,13 @@ player_pos_y = 45
 
 atraction = True # jest to zmienna, która decyduje o tym czy duchy są "przyciągane" do gracza czy "odpychane" od niego
 ghost_direction = [4, 4, 3, 3] # 1 - down, 2 - up, 3 - left, 4 - right, początkowe kierunki kiedy duchy wychodzą z jam
-ghost_direction_start = [4, 4, 3, 3]  # te tablice z "start" są przydatne gdy tracimy życie i duchy zaczynają od nowa
+GHOST_DIRECTION_START = [4, 4, 3, 3]  # te tablice z "start" są przydatne gdy tracimy życie i duchy zaczynają od nowa
 
 ghost_delay = [0, 11, 2, 16] #początkow opóźnienie aby np nie pojawiały się na raz
 ghost_pos_x = [5, 5, 69, 69]
 ghost_pos_y = [29, 29, 29, 29]
-ghost_pos_x_start = [5, 5, 69, 69]
-ghost_pos_y_start = [29, 29, 29, 29]
+GHOST_POS_X_START = [5, 5, 69, 69]
+GHOST_POS_Y_START = [29, 29, 29, 29]
 
 can_the_ghost_go_forward = [True, True, True, True] # true dany duch może poruszać sie w tym samym kierunku, false -  przeszkodę/ściane
 can_the_ghost_change_direction = [False, False, False, False] # dany duch ma mozliwość zmiany kierunku (nie tylko gdy spotka np. ścianę)
@@ -41,9 +41,9 @@ pygame.init()
 gameDisplay = pygame.display.set_mode((800, 700))
 pygame.display.set_caption('P A C M A N')
 
-board_to_move = [[True] * x_size for i in range(y_size)]
-board_yellow_dots = [[False] * x_size for i in range(y_size)]
-board_magic_dots = [[False] * x_size for i in range(y_size)]
+board_to_move = [[True] * X_SIZE for i in range(Y_SIZE)]
+board_yellow_dots = [[False] * X_SIZE for i in range(Y_SIZE)]
+board_magic_dots = [[False] * X_SIZE for i in range(Y_SIZE)]
 
 board.board_lines(gameDisplay)
 board.board_move(board_to_move)
@@ -264,10 +264,10 @@ while not gameExit:
 
                 #obsługa sytucji zjedzenia ducha. pojedyńczy duch gdy się pojawi ponownie to w swoim poczatkowym położeniu etc.
                 else:
-                    ghost_pos_x[ii] = ghost_pos_x_start[ii]
-                    ghost_pos_y[ii] = ghost_pos_y_start[ii]
+                    ghost_pos_x[ii] = GHOST_POS_X_START[ii]
+                    ghost_pos_y[ii] = GHOST_POS_Y_START[ii]
                     ghost_delay[ii] = 200
-                    ghost_direction[ii] = ghost_direction_start[ii]
+                    ghost_direction[ii] = GHOST_DIRECTION_START[ii]
 
         # wyświetlanie aktualnych informacji na dole ekranu
         pygame.draw.rect(gameDisplay, (0, 0, 0), [30, 620, 700, 40])
