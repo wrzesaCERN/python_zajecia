@@ -312,7 +312,7 @@ def board_move(board_to_move):
 
 """
 Funkcja board_dots przypisuje niektórym miejscom na planszy wartość "true".  W miejscu siatki któremu zostało przypisana
-wartość "true" zostanie aktywowana żóta kropeczka. Funkcja ta rysuje też te kropki.
+wartość "true" zostanie aktywowana żóta kropeczka. Funkcja ta rysuje te kropki.
 """
 
 
@@ -441,7 +441,8 @@ def board_dots(gamedisplay, board_yellow_dots, yellow_dot):
 
 
 """
-Funkcja board_magic ustawia na aktywne i rysuje te duże kropki na rogach. Są to kropki "magiczne" - po zjedzeniu takiej kropki duszki od nas uciekają i są niebieskie i możemy je zjeść 
+Funkcja board_magic ustawia na aktywne i rysuje te duże kropki na rogach. Są to kropki "magiczne" - po zjedzeniu takiej
+ kropki duszki od nas uciekają i są niebieskie i możemy je zjeść ...
 """
 
 

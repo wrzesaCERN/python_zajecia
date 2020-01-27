@@ -1,12 +1,13 @@
 import pygame
-import board
 import time
-import ghosts_funtions
+
+import board
+import ghosts_functions
 import game_functions
 import player_functions
 
 """
-ustawienie kilku podstawowych parametrów wyjściowych, jak wielkość ekranu, liczba kropek do zjedzenia (score_max), 
+Ustawienie kilku podstawowych parametrów wejściowych, takich jak wielkość planszy, liczba kropek do zjedzenia (score_max), 
  opóźnienie z jakim wychodzą duchy na początku ghost_delay, początowa pozycja gracza player_pos_x/y etc....
 """
 
@@ -20,17 +21,17 @@ player_pos_x = 43
 player_pos_y = 45
 
 atraction = True # jest to zmienna, która decyduje o tym czy duchy są "przyciągane" do gracza czy "odpychane" od niego
-ghost_direction = [4, 4, 3, 3] # 1 - down, 2 - up, 3 - left, 4 - right, to jest ustawienie początkowego kierunku kiedy wychodzą z jam
-ghost_direction_start = [4, 4, 3, 3]  # jest przydatne gdy tracimy życie i duchy zaczynają od nowa
+ghost_direction = [4, 4, 3, 3] # 1 - down, 2 - up, 3 - left, 4 - right, początkowe kierunki kiedy duchy wychodzą z jam
+ghost_direction_start = [4, 4, 3, 3]  # te tablice z "start" są przydatne gdy tracimy życie i duchy zaczynają od nowa
 
-ghost_delay = [0, 11, 2, 16] # delay at the beginning, when ghosts appear on the board
+ghost_delay = [0, 11, 2, 16] #początkow opóźnienie aby np nie pojawiały się na raz
 ghost_pos_x = [5, 5, 69, 69]
 ghost_pos_y = [29, 29, 29, 29]
 ghost_pos_x_start = [5, 5, 69, 69]
 ghost_pos_y_start = [29, 29, 29, 29]
 
-can_the_ghost_go_forward = [True, True, True, True] # If true the ghost can go one step forward, in the same direction. If "false" it means a wall or an obstacle
-can_the_ghost_change_direction = [False, False, False, False] # It gives a possibility to change the ghost's direction - not only when hit the wall or obstacles
+can_the_ghost_go_forward = [True, True, True, True] # true dany duch może poruszać sie w tym samym kierunku, false -  przeszkodę/ściane
+can_the_ghost_change_direction = [False, False, False, False] # dany duch ma mozliwość zmiany kierunku (nie tylko gdy spotka np. ścianę)
 
 """
 inicjalizacja i stworzenie pacmanowej planszy
@@ -52,14 +53,14 @@ board.board_magic(gameDisplay, board_magic_dots, game_functions.super_yellow_dot
 """
 umieszczenie pacmana i inicjacja duchów
 """
-pacman = ["pacman_open_circle_left.png", "pacman_open_circle_right.png", "pacman_open_circle_up.png", "pacman_open_circle_down.png"]
-ghosts_colors = ["ghost_red.png", "ghost_green.png", "ghost_blue.png", "ghost_pink.png"]
-ghosts_colors_b = ["ghost_red_b.png", "ghost_green_b.png", "ghost_blue_b.png", "ghost_pink_b.png"] #wersje niebieskie po zjedzeniu magicznej kropki
+pacman = ["images/pacman_open_circle_left.png", "images/pacman_open_circle_right.png", "images/pacman_open_circle_up.png", "images/pacman_open_circle_down.png"]
+ghosts_colors = ["images/ghost_red.png", "images/ghost_green.png", "images/ghost_blue.png", "images/ghost_pink.png"]
+ghosts_colors_b = ["images/ghost_red_b.png", "images/ghost_green_b.png", "images/ghost_blue_b.png", "images/ghost_pink_b.png"] #wersje niebieskie po zjedzeniu magicznej kropki
 
-pacman_circle = pygame.image.load("pacman_circle.png")
+pacman_circle = pygame.image.load("images/pacman_circle.png")
 pacman_circle = pygame.transform.scale(pacman_circle, (39, 39))
 
-pacman_bg = pygame.image.load("pacman_bg.png")
+pacman_bg = pygame.image.load("images/pacman_bg.png")
 pacman_bg = pygame.transform.scale(pacman_bg, (38, 36))
 
 pacman_directions = []
@@ -78,19 +79,19 @@ gameDisplay.blit(pacman_directions[0], (player_pos_x*10-3, player_pos_y*10-3))
 muzyka poczatkowa, jedzenie kropek i zabranie życia
 """
 pygame.mixer.set_num_channels(4)
-pygame.mixer.music.load('pacman_beginning.wav')
+pygame.mixer.music.load('music/pacman_beginning.wav')
 pygame.mixer.music.play()
 eating_Sound = pygame.mixer.Channel(2)
-eat_Sound = pygame.mixer.Sound('pacman_chomp.wav')
+eat_Sound = pygame.mixer.Sound('music/pacman_chomp.wav')
 eat_Sound.set_volume(0.5)
 lives_decrease_Sound = pygame.mixer.Channel(3)
-lives_Sound = pygame.mixer.Sound('pacman_death.wav')
+lives_Sound = pygame.mixer.Sound('music/pacman_death.wav')
 lives_Sound.set_volume(0.5)
 
 font = pygame.font.SysFont("comicsansms", 36)
 
 """
-gra rusza.
+gra rusza. Jej super :D
 """
 gameExit = False
 while not gameExit:
@@ -104,12 +105,12 @@ while not gameExit:
     if freeze:
         """
         co każdą iterację kropki malowane są od nowa. dlaczego?
-        ponieważ duszki to  obraz który malowany jest w każdej iteracji na nowej pozycji zgodnej z ich przemieszczeniem,
-        stary duszek na poprzedniej pozycji zsotaje. Dlatego po każdym ruchu duszka malowany jest za nim czarny kwadracik 
-        zmazujący jakby starego dzuszka. Prowadzi to jednak do zjadania obrazu kropek i przez duszki. dlatego poza tym 
-        co każdą iterację malowane są od nowa kropki. Duszki zmienić przypisanych do kropek wartości true. 
-        Dopiero pacman zmienia kropkom, które zjadł wartość true na flase.
-        W kolejnych iteracjach malowane są tylko kropki które mają true.
+        ponieważ duszki to  obrazek, który malowany jest w każdej iteracji na nowej pozycji zgodnej z ich przemieszczeniem.
+        Stary duszek na poprzedniej pozycji zsotaje. Dlatego po każdym ruchu duszka malowany jest za nim czarny kwadracik 
+        zmazujący jakby starego dzuszka. Prowadzi to jednak do zamazywaniu obrazu kropek i przez duszki. Dlatego poza tym
+        co każdą iterację malowane są od nowa kropki. Duszki nie mogą zmienić przypisanych do kropek wartości true.
+        Dopiero pacman zamienia kropeczkom, które zjadł wartość true na flase. W kolejnych iteracjach malowane są tylko 
+        kropki które mają true.
         """
         for i in range(0, 80):
             for j in range(0, 61):
@@ -121,11 +122,8 @@ while not gameExit:
         # tablica d_u_l_r mówi nam w którym kierunku moze sie poruszać gracz w danej iteracji
         d_u_l_r = [False, False, False, False]
 
-        # tablice ruchów duchów [duch1, duch 2, duch 3, duch 4] w danej iteracji
-        ghost_d = [False, False, False, False]
-        ghost_u = [False, False, False, False]
-        ghost_l = [False, False, False, False]
-        ghost_r = [False, False, False, False]
+        # tablice ruchów duchów [duch1, duch 2, duch 3, duch 4]
+        ghost_dulr = [[False, False, False, False], [False, False, False, False], [False, False, False, False], [False, False, False, False]]
 
         #jeśli jest odpychanie to to odpychanie trwa tylko przez 200 iteracji czyli jakieś 20 sekund
         if not atraction:
@@ -135,46 +133,41 @@ while not gameExit:
                 counter = 0
 
         """
-        ruchy duszków. 
+        Ruchy duszków. 
         
-        najpierw dla każdego jest sprawdzana tablica w kótrym kierunku moga się poruszyć 
-        czy nie napotkali jakichś przeszkód, ścian czy też może mają możliwość zmiany kierunku check_the_board
-        potem sprawdzane jest czy nie koliduje ze ścianą lub przeszkodą jeśli tak to wybierany jest inny kierunek
+        Najpierw dla każdego jest sprawdzana tablica, w kótrym kierunku moga się poruszyć 
+        czy nie napotkali jakichś przeszkód, ścian czy też może mają możliwość zmiany kierunku "check_the_board".
+        Potem wybierany jest inny kierunek. "move_forward" i "change_direction" definiuja kierunek ruchu 
         
-        move_forward i change_direction dalej definiuja kierunek ruchu 
-        
-        duchy pojawiają sie tylko wtedy gdy ich zmienna związana z opóźnieniem zostaje zredukowana o 0
+        Duchy pojawiają sie tylko wtedy gdy ich zmienna związana z opóźnieniem zostaje zredukowana o "0"
         """
         for ii in range(4):
-            ghosts_funtions.check_the_board(ii, board_to_move, ghost_pos_x, ghost_pos_y, ghost_direction,
-                                            ghost_d, ghost_u, ghost_l, ghost_r, can_the_ghost_go_forward,
-                                            can_the_ghost_change_direction)
+            ghosts_functions.check_the_board(ii, board_to_move, ghost_pos_x, ghost_pos_y, ghost_direction,
+                                             ghost_dulr, can_the_ghost_go_forward,
+                                             can_the_ghost_change_direction)
 
-            ghost_direction[ii] = ghosts_funtions.move_forward(can_the_ghost_go_forward[ii], ghost_direction[ii],
-                                                               ghost_d[ii], ghost_u[ii], ghost_l[ii], ghost_r[ii],
-                                                               atraction, player_pos_x, player_pos_y, ghost_pos_x[ii],
-                                                               ghost_pos_y[ii])
+            ghost_direction[ii] = ghosts_functions.move_forward(can_the_ghost_go_forward[ii], ghost_direction[ii],
+                                                                ghost_dulr[ii], atraction, player_pos_x, player_pos_y,
+                                                                ghost_pos_x[ii], ghost_pos_y[ii])
 
-            ghost_direction[ii] = ghosts_funtions.change_direction(can_the_ghost_change_direction[ii],
-                                                                   ghost_direction[ii], ghost_d[ii], ghost_u[ii],
-                                                                   ghost_l[ii], ghost_r[ii], atraction, player_pos_x,
-                                                                   player_pos_y, ghost_pos_x[ii], ghost_pos_y[ii])
+            ghost_direction[ii] = ghosts_functions.change_direction(can_the_ghost_change_direction[ii],
+                                                                    ghost_direction[ii], ghost_dulr[ii], atraction, player_pos_x,
+                                                                    player_pos_y, ghost_pos_x[ii], ghost_pos_y[ii])
 
             if ghost_delay[ii] == 0:
-                ghosts_funtions.dispay_ghosts(ii, ghost_direction, ghost_d, ghost_u, ghost_l, ghost_r, ghost_pos_x,
-                                              ghost_pos_y, pacman_bg, gameDisplay, ghosts_b, ghosts, not atraction)
+                ghosts_functions.dispay_ghosts(ii, ghost_direction, ghost_dulr, ghost_pos_x,
+                                               ghost_pos_y, pacman_bg, gameDisplay, ghosts_b, ghosts, not atraction)
             if ghost_delay[ii] > 0:
                 ghost_delay[ii] -= 1
 
 
         """
-        ruch gracza 
+        Ruch gracza 
         
-        sprawdzamy w których kierunkach gracz może się ruszać. Jeśli kierunke wybrany przez gracza na klawiaturze 
-        jest dostepny to się tam przeimieszczamy. Przy okazji jeśli zjadamy kropk i wyłączamy ich widoczność. 
-        Sprawdzamy też czy zjadliśmy magiczną kropkę i jesli tak ustawiamy mozliwoś zabijania duchów oraz ich uciekanie 
+        Sprawdzamy, w których kierunkach gracz może się ruszać. Jeśli kierunke wybrany przez gracza na klawiaturze 
+        jest dostepny to się tam przemieszczamy. Przy okazji zjadamy kropk i wyłączamy ich widoczność (true-false). 
+        Sprawdzamy też czy zjedliśmy magiczną kropkę i jesli tak ustawiamy mozliwoś zabijania duchów oraz ich uciekanie 
         """
-
 
         d_u_l_r = player_functions.player_avaliability_to_move(board_to_move, player_pos_x, player_pos_y)
 
@@ -222,8 +215,19 @@ while not gameExit:
         # obsługa naszej wygranej
         if score == score_max:
             game_functions.retry(gameDisplay, True, board_yellow_dots, game_functions.yellow_dot, board_magic_dots, game_functions.super_yellow_dot)
+
             lives = 3
-            score = 0
+            score = 1
+            atraction = True
+            player_pos_x = 43
+            player_pos_y = 45
+            ghost_pos_x = [5, 5, 69, 69]
+            ghost_pos_y = [29, 29, 29, 29]
+            ghost_direction = [4, 4, 3, 3]  # 1 - down, 2 - up, 3 - left, 4 - right
+            ghost_delay = [0, 11, 2, 16]
+            game_functions.onceagain(gameDisplay, board_yellow_dots, board_magic_dots, pacman_directions,
+                      player_pos_x, player_pos_y)
+            time.sleep(2)
 
         #sytuacja gdy duch i gracz są zdecydowanie za blisko
         for ii in range(4):
@@ -234,7 +238,7 @@ while not gameExit:
                     if not lives_decrease_Sound.get_busy():
                         lives_decrease_Sound.play(lives_Sound)
 
-                    # nie tylko utrata zycia a i śmierć :/
+                    # nie tylko utrata zycia a też śmierć :/
                     if lives == 1:
                         game_functions.retry(gameDisplay, False, board_yellow_dots, game_functions.yellow_dot, board_magic_dots,
                                             game_functions.super_yellow_dot)
@@ -252,13 +256,13 @@ while not gameExit:
                     ghost_direction = [4, 4, 3, 3]  # 1 - down, 2 - up, 3 - left, 4 - right
                     ghost_delay = [0, 11, 2, 16]
 
-                    # jeśli nadal żyjemy po utacie życia cofa dychy i pacmana do ustawień pierwotnych (położenia, opóxnienia)
+                    # jeśli nadal żyjemy po utacie życia cofa duchy i pacmana do ustawień pierwotnych (położenia, opóźnienia)
                     game_functions.still_alive(gameDisplay, board_yellow_dots, game_functions.yellow_dot, board_magic_dots,
                                 game_functions.super_yellow_dot, pacman_directions, player_pos_x, player_pos_y)
 
                     time.sleep(2)
 
-                #obsługa sytucji zjedzenia ducha. pojedyńczy duch gdy się pojawi ponownie to w swoimpoczatkowym położeniu etc.
+                #obsługa sytucji zjedzenia ducha. pojedyńczy duch gdy się pojawi ponownie to w swoim poczatkowym położeniu etc.
                 else:
                     ghost_pos_x[ii] = ghost_pos_x_start[ii]
                     ghost_pos_y[ii] = ghost_pos_y_start[ii]

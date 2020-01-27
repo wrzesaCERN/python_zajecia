@@ -2,11 +2,11 @@ import pygame
 import board
 
 """
-funcje check_function_x i check_function_y sprawdzają odpowiendio czy po prawej i lewej oraz od góry / dołu mamy 
-5 pół ruchu ustawionych na true. ostatni parametr np down mówi o tym że jeśli jest true to sprawdzamy czy pod nami jest 
-te 5 pół. Ustawiony na false oznacza że sprawdzamy kierunek przeciwny czyli up
+Funcje "check_function_x" i "check_function_y" sprawdzają odpowiendio czy po prawej / lewej oraz od góry / dołu mamy 
+5 pól ruchu ustawionych na true. Ostatni parametr np down mówi o tym że jeśli jest true to sprawdzamy czy pod nami jest 
+ 5 pół. Ustawiony na false oznacza, że sprawdzamy kierunek przeciwny czyli up
 
-te dwie są subfunkcjami używanymi w innych funkcjach 
+Te dwie są subfunkcjami używanymi w innych funkcjach spawdzających dostępność planszy 
 """
 
 
@@ -41,7 +41,7 @@ def check_function_y(board_to_move, ghost_pos_y, ghost_pos_x, right):
 
 
 """
-funkcje odpowiedzialne za rywoanie i wygląd kropek na zadanej pozycji. yellow_dot - zwykłe, super_yellow_dot - magiczne 
+funkcje odpowiedzialne za rywsanie i wygląd kropek na zadanej pozycji. yellow_dot - zwykłe, super_yellow_dot - magiczne 
 """
 
 
@@ -102,7 +102,7 @@ def retry(gameDisplay, win, board_yellow_dots, yellow_dot, board_magic_dots, sup
 
 
 """
-still_alive jest to funkcja wykonywana gdy po utracie zycia nadal mamy koljne. cel - dświerzenie planszy
+"still_alive" jest to funkcja wykonywana gdy po utracie zycia nadal mamy koljne. cel ? - dświerzenie planszy
 """
 
 
@@ -120,3 +120,17 @@ def still_alive(gameDisplay, board_yellow_dots, yellow_dot, board_magic_dots, su
     gameDisplay.blit(pacman_directions[0], (player_pos_x * 10 - 3, player_pos_y * 10 - 3))
     pygame.display.update()
 
+
+"""
+funkcja "onceagain" to funkcja wykonywana gdy po wygraniu chcey nadal grać
+"""
+
+
+def onceagain(gameDisplay, board_yellow_dots, board_magic_dots, pacman_directions, player_pos_x, player_pos_y):
+
+    board.board_lines(gameDisplay)
+    board.board_dots(gameDisplay, board_yellow_dots, yellow_dot)
+    board.board_magic(gameDisplay, board_magic_dots, super_yellow_dot)
+
+    gameDisplay.blit(pacman_directions[0], (player_pos_x * 10 - 3, player_pos_y * 10 - 3))
+    pygame.display.update()

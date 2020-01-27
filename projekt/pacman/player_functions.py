@@ -1,7 +1,7 @@
 import game_functions
 
 """
-player_avaliability_to_move sprawdza, w których kierunkach można się ruszyć 
+"player_avaliability_to_move" sprawdza, w których kierunkach można się ruszyć 
 """
 
 
@@ -40,7 +40,7 @@ def move_just_move(gameDisplay, pacman_bg, player_pos_x, player_pos_y, pacman_di
 """
 move_score sprawdzenie czy przesunięcie nie generuje zjedzenia jakiejśc aktywnje kropki.jeśli natrafi na aktywna kropkę to zwiekszamy
 pulę zdobytych punktów i zamieniamy ją na false tak by już jej nie zjadac drugi raz 
-tu tez jest obsługa dźwieku jedzenia kropek
+tu tez jest obsługa dźwieku jedzenia kropek 
 """
 
 
@@ -75,8 +75,8 @@ def move_score(board_yellow_dots, player_pos_x, player_pos_y, add_x, add_y, eati
 
 
 """
-move_magic_dot obsługa zjadania magicznych kropek. Oczywiście tu też je "gasimy" ustawiając na false a także włączamy możliwośc zabijania 
-duchów która z koleii uruchamia ich oepychanie etc..
+"move_magic_dot" obsługa zjadania magicznych kropek. Oczywiście tu też je "gasimy" ustawiając na false, a także
+ włączamy możliwośc zabijania duchów, która z koleii uruchamia ich odpychanie etc..
 """
 
 
@@ -85,6 +85,7 @@ def move_magic_dot(board_magic_dots, player_pos_x, player_pos_y, add_x, add_y, o
     if board_magic_dots[player_pos_y + add_y][player_pos_x + add_x]:
         board_magic_dots[player_pos_y + add_y][player_pos_x + add_x] = False
         power_to_kill = True
+
     if option == 0:
         if board_magic_dots[player_pos_y + add_y + 3][player_pos_x + add_x]:
             board_magic_dots[player_pos_y + add_y + 3][player_pos_x + add_x] = False
